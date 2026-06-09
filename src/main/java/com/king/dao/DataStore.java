@@ -10,6 +10,7 @@ public class DataStore {
     public final BaseDataAccess<Equipment> equipments = new BaseDataAccess<>();
     public final BaseDataAccess<Team> teams = new BaseDataAccess<>();
     public final BaseDataAccess<MatchRecord> matches = new BaseDataAccess<>();
+    public final BaseDataAccess<DevLog> devLogs = new BaseDataAccess<>();
 
     private static final DataStore INSTANCE = new DataStore();
 

@@ -16,6 +16,7 @@ public class DataManageService {
         accessorMap.put(Equipment.class, store.equipments);
         accessorMap.put(Team.class, store.teams);
         accessorMap.put(MatchRecord.class, store.matches);
+        accessorMap.put(DevLog.class, store.devLogs);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +39,7 @@ public class DataManageService {
         if (clazz == Equipment.class) return "装备";
         if (clazz == Team.class) return "队伍";
         if (clazz == MatchRecord.class) return "比赛记录";
+        if (clazz == DevLog.class) return "开发日志";
         return clazz.getSimpleName();
     }
 }
