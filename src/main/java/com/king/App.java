@@ -12,3 +12,5 @@ public class App {
     }
 }
 // version 1.0.0 - AI-Assisted Honor of Kings IMS
+
+/* 开发完成日期: 2026-06-09 */
