@@ -97,15 +97,16 @@ public class MenuController {
 
     private void showMainMenu() {
         Person user = authService.getCurrentUser();
+        boolean isAdmin = user instanceof Admin;
         System.out.println("\n========== 主菜单 ==========");
-        System.out.println("当前用户: " + user.getNickname() + " (" + (user instanceof Admin ? "管理员" : "玩家") + ")");
-        System.out.println("1. 数据管理");
+        System.out.println("当前用户: " + user.getNickname() + " (" + (isAdmin ? "管理员" : "玩家") + ")");
+        System.out.println("1. " + (isAdmin ? "数据管理（增删改）" : "数据浏览"));
         System.out.println("2. 搜索");
         System.out.println("3. 排行榜");
-        System.out.println("4. 查看个人信息");
+        System.out.println("4. 查看/修改个人信息");
         System.out.println("5. 管理员专区");
         System.out.println("6. 保存数据到文件");
-        System.out.println("7. 玩家查询（ID/昵称）");
+        System.out.println("7. 玩家查询");
         System.out.println("8. 队伍概览");
         System.out.println("9. 英雄详情");
         System.out.println("10. 装备统计");
@@ -118,7 +119,7 @@ public class MenuController {
             case "1" -> showDataManageMenu();
             case "2" -> showSearchMenu();
             case "3" -> showRankingMenu();
-            case "4" -> System.out.println(user);
+            case "4" -> doEditProfile(user);
             case "5" -> { if (authService.isAdmin()) showAdminMenu(); else throw new InputException("无权限！"); }
             case "6" -> doSaveData();
             case "7" -> doPlayerQuery();
