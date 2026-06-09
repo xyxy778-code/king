@@ -11,8 +11,3 @@ public class App {
         new MenuController().start();
     }
 }
-// version 1.0.0 - AI-Assisted Honor of Kings IMS
-
-/* 开发完成日期: 2026-06-09 */
-
-// 项目已通过全部12个测试用例验证
