@@ -17,6 +17,7 @@ public class SearchService {
     public Map<String, List<? extends Searchable>> searchAll(String keyword) {
         Map<String, List<? extends Searchable>> results = new LinkedHashMap<>();
         results.put("玩家", search(store.players.getAll(), keyword));
+        results.put("管理员", search(store.admins.getAll(), keyword));
         results.put("英雄", search(store.heroes.getAll(), keyword));
         results.put("装备", search(store.equipments.getAll(), keyword));
         results.put("队伍", search(store.teams.getAll(), keyword));
