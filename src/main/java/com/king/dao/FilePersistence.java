@@ -103,27 +103,31 @@ public class FilePersistence {
     }
 
     private String heroToLine(Hero h) {
-        return String.join("|", h.getId(), h.getName(), h.getTitle(), h.getRole(),
-                String.valueOf(h.getPrice()), String.valueOf(h.getWinRate()));
+        return String.join("|", h.getId(), h.getName(), h.getTitle(), h.getHeroType().name(),
+                String.valueOf(h.getPrice()), String.valueOf(h.getWinRate()),
+                h.getOwnerPlayerId() == null ? "" : h.getOwnerPlayerId());
     }
 
     private Hero lineToHero(String line) {
-        String[] parts = line.split("\\|", 6);
-        if (parts.length < 6) return null;
-        Hero h = new Hero(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4]));
+        String[] parts = line.split("\\|", 7);
+        if (parts.length < 7) return null;
+        Hero h = new Hero(parts[0], parts[1], parts[2],
+                HeroType.valueOf(parts[3]), Integer.parseInt(parts[4]));
         h.setWinRate(Integer.parseInt(parts[5]));
+        if (!parts[6].isBlank()) h.setOwnerPlayerId(parts[6]);
         return h;
     }
 
     private String equipmentToLine(Equipment e) {
-        return String.join("|", e.getId(), e.getName(), e.getCategory(),
+        return String.join("|", e.getId(), e.getName(), e.getCategoryEnum().name(),
                 String.valueOf(e.getPrice()), e.getEffect());
     }
 
     private Equipment lineToEquipment(String line) {
         String[] parts = line.split("\\|", 5);
         if (parts.length < 5) return null;
-        return new Equipment(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]), parts[4]);
+        return new Equipment(parts[0], parts[1],
+                EquipmentCategory.valueOf(parts[2]), Integer.parseInt(parts[3]), parts[4]);
     }
 
     private String teamToLine(Team t) {

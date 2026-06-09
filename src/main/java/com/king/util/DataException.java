@@ -1,6 +1,6 @@
 package com.king.util;
 
-public class DataException extends Exception {
+public class DataException extends RuntimeException {
     public DataException(String message) {
         super(message);
     }
