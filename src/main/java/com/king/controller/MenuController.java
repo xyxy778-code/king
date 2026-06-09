@@ -344,23 +344,35 @@ public class MenuController {
     private void showRankingMenu() {
         while (true) {
             System.out.println("\n--- 排行榜 ---");
-            System.out.println("1. 玩家积分排行");
+            System.out.println("1. 玩家胜率排行");
             System.out.println("2. 玩家等级排行");
-            System.out.println("3. 英雄胜率排行");
-            System.out.println("4. 英雄价格排行");
-            System.out.println("5. 装备价格排行");
+            System.out.println("3. 玩家比赛数量排行");
+            System.out.println("4. 玩家综合评分排行");
+            System.out.println("   (评分公式: 积分×0.5 + 等级×10 + 参赛场次×5)");
+            System.out.println("5. 英雄胜率排行");
+            System.out.println("6. 英雄价格排行");
+            System.out.println("7. 装备价格排行");
+            System.out.println("8. " + RankingService.getTieBreakerRule());
             System.out.println("0. 返回");
             System.out.print("请选择: ");
             String choice = readLine();
 
             switch (choice) {
-                case "1" -> showRanking("玩家积分排行", rankingService.getPlayerRankingByScore());
+                case "1" -> showRanking("玩家胜率排行", rankingService.getPlayerRankingByWinRate());
                 case "2" -> showRanking("玩家等级排行", rankingService.getPlayerRankingByLevel());
-                case "3" -> showRanking("英雄胜率排行", rankingService.getHeroRankingByWinRate());
-                case "4" -> showRanking("英雄价格排行", rankingService.getHeroRankingByPrice());
-                case "5" -> showRanking("装备价格排行", rankingService.getEquipmentRankingByPrice());
+                case "3" -> showRanking("玩家比赛数量排行", rankingService.getPlayerRankingByMatchCount());
+                case "4" -> showRanking("玩家综合评分排行"
+                        + "\n评分=积分×0.5+等级×10+参赛场次×5", rankingService.getPlayerRankingByCustomScore());
+                case "5" -> showRanking("英雄胜率排行", rankingService.getHeroRankingByWinRate());
+                case "6" -> showRanking("英雄价格排行", rankingService.getHeroRankingByPrice());
+                case "7" -> showRanking("装备价格排行", rankingService.getEquipmentRankingByPrice());
+                case "8" -> System.out.println("\n" + RankingService.getTieBreakerRule());
                 case "0" -> { return; }
                 default -> throw new InputException("无效选项: " + choice);
+            }
+            if (!"8".equals(choice)) {
+                System.out.println("按回车键返回...");
+                readLine();
             }
         }
     }
@@ -370,12 +382,23 @@ public class MenuController {
         if (list.isEmpty()) {
             System.out.println("暂无数据");
         } else {
+            int rank = 1;
+            boolean first = true;
             for (int i = 0; i < list.size(); i++) {
-                System.out.println("第" + (i + 1) + "名: " + list.get(i));
+                if (i > 0 && !isSameRank(list.get(i), list.get(i - 1))) {
+                    rank = i + 1;
+                }
+                if (first) { first = false; }
+                System.out.println("第" + rank + "名: " + list.get(i));
             }
         }
-        System.out.println("按回车键返回...");
-        readLine();
+    }
+
+    private <T> boolean isSameRank(T a, T b) {
+        if (a instanceof Player pa && b instanceof Player pb) {
+            return pa.getScore() == pb.getScore() && pa.getLevel() == pb.getLevel();
+        }
+        return a.equals(b);
     }
 
     private String readLine() {
