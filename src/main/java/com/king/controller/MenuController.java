@@ -170,6 +170,97 @@ public class MenuController {
         readLine();
     }
 
+    private void doTeamOverview() {
+        System.out.print("请输入队伍ID或名称: ");
+        String keyword = readLine();
+        List<Team> results = teamOverviewService.searchTeam(keyword);
+        if (results.isEmpty()) { System.out.println("未找到匹配的队伍"); return; }
+        if (results.size() == 1) {
+            System.out.println(teamOverviewService.getTeamDetail(results.get(0)));
+        } else {
+            System.out.println("找到多个匹配:");
+            for (int i = 0; i < results.size(); i++) System.out.println((i+1) + ". " + results.get(i));
+            System.out.print("请选择序号（0跳过）: ");
+            try {
+                int idx = Integer.parseInt(readLine()) - 1;
+                if (idx >= 0 && idx < results.size())
+                    System.out.println(teamOverviewService.getTeamDetail(results.get(idx)));
+            } catch (NumberFormatException e) { System.out.println("无效序号"); }
+        }
+        System.out.println("按回车键返回..."); readLine();
+    }
+
+    private void doHeroDetail() {
+        System.out.print("请输入英雄ID或名称: ");
+        String keyword = readLine();
+        List<Hero> results = heroDetailService.searchHero(keyword);
+        if (results.isEmpty()) { System.out.println("未找到匹配的英雄"); return; }
+        if (results.size() == 1) {
+            System.out.println(heroDetailService.getHeroDetail(results.get(0)));
+        } else {
+            System.out.println("找到多个匹配:");
+            for (int i = 0; i < results.size(); i++) System.out.println((i+1) + ". " + results.get(i));
+            System.out.print("请选择序号（0跳过）: ");
+            try {
+                int idx = Integer.parseInt(readLine()) - 1;
+                if (idx >= 0 && idx < results.size())
+                    System.out.println(heroDetailService.getHeroDetail(results.get(idx)));
+            } catch (NumberFormatException e) { System.out.println("无效序号"); }
+        }
+        System.out.println("按回车键返回..."); readLine();
+    }
+
+    private void doEquipmentStats() {
+        while (true) {
+            System.out.println("\n--- 装备统计 ---");
+            System.out.println("1. 按使用次数排序");
+            System.out.println("2. 按胜率影响排序");
+            System.out.println("3. 按综合评分排序（公式: 胜率×0.4 + 携带英雄数×2.0 + 使用次数×0.1）");
+            System.out.println("0. 返回");
+            System.out.print("请选择: ");
+            String choice = readLine();
+            List<EquipmentStatsService.EquipmentStat> list;
+            switch (choice) {
+                case "1" -> { list = equipmentStatsService.getStatsByUsage(); for (var s : list) s.useCount = s.equipCount; }
+                case "2" -> list = equipmentStatsService.getStatsByWinRate();
+                case "3" -> { list = equipmentStatsService.getStatsByCustomScore(); for (var s : list) s.computeCustomScore(); }
+                case "0" -> { return; }
+                default -> { System.out.println("无效选择！"); continue; }
+            }
+            boolean first = true;
+            for (var s : list) {
+                if (first && "2".equals(choice)) {
+                    System.out.println("\n排序依据: 装备在比赛中的胜率");
+                    first = false;
+                } else if (first && "1".equals(choice)) {
+                    System.out.println("\n排序依据: 装备被英雄携带的总次数");
+                    first = false;
+                } else if (first) {
+                    System.out.println("\n排序依据: 综合评分 = 胜率×0.4 + 携带英雄数×2.0 + 使用次数×0.1");
+                    first = false;
+                }
+                System.out.println(s);
+            }
+            System.out.println("按回车键返回..."); readLine();
+        }
+    }
+
+    private void doMatchHistory() {
+        System.out.print("请输入要显示的最新比赛场数N: ");
+        try {
+            int n = Integer.parseInt(readLine());
+            if (n <= 0) { System.out.println("请输入正整数"); return; }
+            List<MatchRecord> matches = matchHistoryService.getRecentMatches(n);
+            if (matches.isEmpty()) { System.out.println("暂无比赛记录"); return; }
+            for (MatchRecord m : matches) {
+                System.out.println(matchHistoryService.getMatchDetail(m));
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("无效数字");
+        }
+        System.out.println("按回车键返回..."); readLine();
+    }
+
     private void showAdminMenu() {
         while (true) {
             System.out.println("\n--- 管理员专区 ---");
