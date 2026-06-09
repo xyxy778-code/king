@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 import java.util.List;
 

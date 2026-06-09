@@ -1,6 +1,6 @@
 package com.king.dao;
 
-import com.king.entity.*;
+import com.king.model.*;
 import com.king.util.DataException;
 import java.io.*;
 import java.nio.file.*;

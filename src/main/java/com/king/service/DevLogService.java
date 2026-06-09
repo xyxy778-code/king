@@ -1,7 +1,7 @@
 package com.king.service;
 
 import com.king.dao.DataStore;
-import com.king.entity.DevLog;
+import com.king.model.DevLog;
 import java.util.*;
 import java.util.stream.Collectors;
 

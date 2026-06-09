@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public abstract class BaseEntity implements Identifiable {
     protected String id;

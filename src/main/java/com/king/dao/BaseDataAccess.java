@@ -1,6 +1,6 @@
 package com.king.dao;
 
-import com.king.entity.Identifiable;
+import com.king.model.Identifiable;
 import java.util.*;
 
 public class BaseDataAccess<T extends Identifiable> implements DataAccess<T> {

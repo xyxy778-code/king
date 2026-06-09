@@ -1,9 +1,9 @@
 package com.king.service;
 
 import com.king.dao.DataStore;
-import com.king.entity.Admin;
-import com.king.entity.Person;
-import com.king.entity.Player;
+import com.king.model.Admin;
+import com.king.model.Person;
+import com.king.model.Player;
 import java.util.Optional;
 
 public class AuthService {

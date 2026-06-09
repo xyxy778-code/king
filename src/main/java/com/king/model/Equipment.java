@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public class Equipment extends BaseEntity implements Searchable, Rankable {
     private EquipmentCategory category;

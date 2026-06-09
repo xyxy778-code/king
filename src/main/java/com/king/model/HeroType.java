@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public enum HeroType {
     WARRIOR("战士"),

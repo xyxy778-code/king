@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public class Admin extends Person implements Searchable {
     private String role;

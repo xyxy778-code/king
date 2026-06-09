@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public enum EquipmentCategory {
     ATTACK("攻击"),

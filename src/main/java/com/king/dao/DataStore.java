@@ -1,6 +1,6 @@
 package com.king.dao;
 
-import com.king.entity.*;
+import com.king.model.*;
 import java.util.*;
 
 public class DataStore {

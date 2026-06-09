@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 import com.king.dao.DataStore;
 import java.util.ArrayList;

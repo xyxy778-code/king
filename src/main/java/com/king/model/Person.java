@@ -1,4 +1,4 @@
-package com.king.entity;
+package com.king.model;
 
 public abstract class Person extends BaseEntity implements Searchable {
     protected String username;

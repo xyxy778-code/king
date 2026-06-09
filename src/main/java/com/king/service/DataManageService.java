@@ -2,7 +2,7 @@ package com.king.service;
 
 import com.king.dao.BaseDataAccess;
 import com.king.dao.DataStore;
-import com.king.entity.*;
+import com.king.model.*;
 
 public class DataManageService {
     private final DataStore store = DataStore.getInstance();

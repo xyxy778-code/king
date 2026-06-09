@@ -1,7 +1,7 @@
 package com.king.controller;
 
 import com.king.dao.FilePersistence;
-import com.king.entity.*;
+import com.king.model.*;
 import com.king.service.*;
 import com.king.util.DataException;
 import com.king.util.InputException;

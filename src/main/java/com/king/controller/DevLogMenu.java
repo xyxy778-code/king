@@ -1,6 +1,6 @@
 package com.king.controller;
 
-import com.king.entity.DevLog;
+import com.king.model.DevLog;
 import com.king.service.DevLogService;
 import com.king.util.InputException;
 import java.util.*;
