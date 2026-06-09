@@ -1,13 +1,17 @@
 package com.king.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hero extends BaseEntity implements Searchable, Rankable {
     private String title;
     private HeroType heroType;
     private int price;
     private int winRate;
     private String ownerPlayerId;
+    private List<String> equipIds;
 
-    public Hero() { super(); }
+    public Hero() { super(); this.equipIds = new ArrayList<>(); }
 
     public Hero(String id, String name, String title, HeroType heroType, int price) {
         super(id, name);
@@ -15,6 +19,7 @@ public class Hero extends BaseEntity implements Searchable, Rankable {
         this.heroType = heroType;
         this.price = price;
         this.winRate = 50;
+        this.equipIds = new ArrayList<>();
     }
 
     public String getTitle() { return title; }
@@ -29,6 +34,8 @@ public class Hero extends BaseEntity implements Searchable, Rankable {
     public String getOwnerPlayerId() { return ownerPlayerId; }
     public void setOwnerPlayerId(String ownerPlayerId) { this.ownerPlayerId = ownerPlayerId; }
     public boolean isOwned() { return ownerPlayerId != null && !ownerPlayerId.isBlank(); }
+    public List<String> getEquipIds() { return equipIds; }
+    public void setEquipIds(List<String> equipIds) { this.equipIds = equipIds; }
 
     @Override
     public boolean matches(String keyword) {
