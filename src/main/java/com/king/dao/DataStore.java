@@ -140,15 +140,45 @@ public class DataStore {
         teams.add(t1); teams.add(t2); teams.add(t3);
 
         // ==================== 10 比赛记录 ====================
-        matches.add(new MatchRecord("M01", "T01", "T02", "T01"));
-        matches.add(new MatchRecord("M02", "T02", "T03", "T02"));
-        matches.add(new MatchRecord("M03", "T01", "T03", "T01"));
-        matches.add(new MatchRecord("M04", "T02", "T01", "T01"));
-        matches.add(new MatchRecord("M05", "T03", "T02", "T03"));
-        matches.add(new MatchRecord("M06", "T01", "T02", "T01"));
-        matches.add(new MatchRecord("M07", "T03", "T01", "T03"));
-        matches.add(new MatchRecord("M08", "T02", "T03", "T02"));
-        matches.add(new MatchRecord("M09", "T01", "T03", "T01"));
-        matches.add(new MatchRecord("M10", "T02", "T01", "T02"));
+        MatchRecord m01 = new MatchRecord("M01", "T01", "T02", "T01");
+        m01.getHeroIds().addAll(Arrays.asList("H01","H03","H08","H14","H10","H02","H06","H07","H13","H11"));
+        m01.setMatchTime(java.time.LocalDateTime.of(2026,5,1,14,0));
+        matches.add(m01);
+        MatchRecord m02 = new MatchRecord("M02", "T02", "T03", "T02");
+        m02.getHeroIds().addAll(Arrays.asList("H02","H06","H09","H13","H10","H04","H07","H12","H15","H11"));
+        m02.setMatchTime(java.time.LocalDateTime.of(2026,5,3,15,30));
+        matches.add(m02);
+        MatchRecord m03 = new MatchRecord("M03", "T01", "T03", "T01");
+        m03.getHeroIds().addAll(Arrays.asList("H01","H08","H12","H14","H10","H04","H07","H15","H09","H11"));
+        m03.setMatchTime(java.time.LocalDateTime.of(2026,5,5,19,0));
+        matches.add(m03);
+        MatchRecord m04 = new MatchRecord("M04", "T02", "T01", "T01");
+        m04.getHeroIds().addAll(Arrays.asList("H05","H09","H11","H13","H06","H03","H01","H15","H14","H08"));
+        m04.setMatchTime(java.time.LocalDateTime.of(2026,5,8,20,0));
+        matches.add(m04);
+        MatchRecord m05 = new MatchRecord("M05", "T03", "T02", "T03");
+        m05.getHeroIds().addAll(Arrays.asList("H04","H07","H12","H09","H15","H02","H06","H11","H13","H05"));
+        m05.setMatchTime(java.time.LocalDateTime.of(2026,5,10,18,30));
+        matches.add(m05);
+        MatchRecord m06 = new MatchRecord("M06", "T01", "T02", "T01");
+        m06.getHeroIds().addAll(Arrays.asList("H01","H03","H08","H12","H14","H02","H05","H09","H13","H10"));
+        m06.setMatchTime(java.time.LocalDateTime.of(2026,5,12,21,0));
+        matches.add(m06);
+        MatchRecord m07 = new MatchRecord("M07", "T03", "T01", "T03");
+        m07.getHeroIds().addAll(Arrays.asList("H04","H07","H11","H15","H12","H01","H03","H08","H14","H10"));
+        m07.setMatchTime(java.time.LocalDateTime.of(2026,5,15,14,0));
+        matches.add(m07);
+        MatchRecord m08 = new MatchRecord("M08", "T02", "T03", "T02");
+        m08.getHeroIds().addAll(Arrays.asList("H02","H05","H06","H10","H13","H04","H09","H11","H12","H15"));
+        m08.setMatchTime(java.time.LocalDateTime.of(2026,5,18,16,0));
+        matches.add(m08);
+        MatchRecord m09 = new MatchRecord("M09", "T01", "T03", "T01");
+        m09.getHeroIds().addAll(Arrays.asList("H01","H08","H14","H03","H12","H04","H07","H09","H11","H15"));
+        m09.setMatchTime(java.time.LocalDateTime.of(2026,5,20,19,30));
+        matches.add(m09);
+        MatchRecord m10 = new MatchRecord("M10", "T02", "T01", "T02");
+        m10.getHeroIds().addAll(Arrays.asList("H02","H05","H06","H13","H10","H01","H03","H08","H14","H12"));
+        m10.setMatchTime(java.time.LocalDateTime.of(2026,5,22,20,0));
+        matches.add(m10);
     }
 }
