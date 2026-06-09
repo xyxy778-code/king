@@ -1,7 +1,9 @@
 package com.king;
 
+import com.king.controller.MenuController;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello from king!");
+        new MenuController().start();
     }
 }
