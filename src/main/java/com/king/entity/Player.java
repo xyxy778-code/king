@@ -3,10 +3,7 @@ package com.king.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends BaseEntity implements Searchable, Rankable, HasOwner {
-    private String username;
-    private String password;
-    private String nickname;
+public class Player extends Person implements Searchable, Rankable, HasOwner {
     private int level;
     private int score;
     private List<String> heroIds;
@@ -17,21 +14,12 @@ public class Player extends BaseEntity implements Searchable, Rankable, HasOwner
     }
 
     public Player(String id, String username, String password, String nickname) {
-        super(id, username);
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
+        super(id, username, password, nickname);
         this.level = 1;
         this.score = 0;
         this.heroIds = new ArrayList<>();
     }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public String getNickname() { return nickname; }
-    public void setNickname(String nickname) { this.nickname = nickname; }
     public int getLevel() { return level; }
     public void setLevel(int level) { this.level = level; }
     public int getScore() { return score; }
@@ -41,10 +29,7 @@ public class Player extends BaseEntity implements Searchable, Rankable, HasOwner
 
     @Override
     public boolean matches(String keyword) {
-        String k = keyword.toLowerCase();
-        return id.toLowerCase().contains(k)
-                || username.toLowerCase().contains(k)
-                || nickname.toLowerCase().contains(k);
+        return super.matches(keyword);
     }
 
     @Override
