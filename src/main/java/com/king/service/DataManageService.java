@@ -27,6 +27,10 @@ public class DataManageService {
         return getAccessor(clazz).getAll();
     }
 
+    public java.util.Collection<BaseDataAccess<?>> getAllAccessors() {
+        return accessorMap.values();
+    }
+
     public String getEntityLabel(Class<?> clazz) {
         if (clazz == Player.class) return "玩家";
         if (clazz == Admin.class) return "管理员";

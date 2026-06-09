@@ -281,6 +281,7 @@ public class MenuController {
     }
 
     private void showDataManageMenu() {
+        boolean isAdmin = authService.isAdmin();
         Map<String, Class<?>> entityMenus = new LinkedHashMap<>();
         entityMenus.put("1", Player.class);
         entityMenus.put("2", Admin.class);
@@ -290,15 +291,25 @@ public class MenuController {
         entityMenus.put("6", MatchRecord.class);
 
         while (true) {
-            System.out.println("\n--- 数据管理 ---");
+            System.out.println("\n--- 数据管理" + (isAdmin ? "（管理员-可增删改）" : "（浏览模式）") + " ---");
             for (Map.Entry<String, Class<?>> e : entityMenus.entrySet()) {
-                System.out.println(e.getKey() + ". " + dataService.getEntityLabel(e.getValue()) + "管理");
+                System.out.println(e.getKey() + ". 查看" + dataService.getEntityLabel(e.getValue()));
+            }
+            if (isAdmin) {
+                System.out.println("a. 添加数据");
+                System.out.println("d. 删除数据");
+                System.out.println("u. 修改数据");
             }
             System.out.println("0. 返回");
             System.out.print("请选择: ");
             String choice = readLine();
 
             if ("0".equals(choice)) return;
+
+            if ("a".equals(choice) && isAdmin) { doAddEntity(); continue; }
+            if ("d".equals(choice) && isAdmin) { doDeleteEntity(); continue; }
+            if ("u".equals(choice) && isAdmin) { doUpdateEntity(); continue; }
+
             Class<?> clazz = entityMenus.get(choice);
             if (clazz != null) {
                 String label = dataService.getEntityLabel(clazz);
@@ -314,9 +325,38 @@ public class MenuController {
                 System.out.println("按回车键返回...");
                 readLine();
             } else {
-                throw new InputException("无效选项: " + choice);
+                System.out.println("无效选择！");
             }
         }
+    }
+
+    private void doAddEntity() {
+        System.out.print("输入ID: "); String id = readLine();
+        System.out.print("输入名称: "); String name = readLine();
+        System.out.println("添加功能需在对应管理模块中完善，当前仅演示权限控制");
+    }
+
+    private void doDeleteEntity() {
+        System.out.print("输入要删除的实体ID: "); String id = readLine();
+        for (var accessor : dataService.getAllAccessors()) {
+            var obj = accessor.get(id);
+            if (obj != null) { accessor.delete(id);
+                System.out.println("已删除: " + id); return; }
+        }
+        System.out.println("未找到ID: " + id);
+    }
+
+    private void doUpdateEntity() {
+        System.out.print("输入要修改的实体ID: "); String id = readLine();
+        for (var accessor : dataService.getAllAccessors()) {
+            var obj = accessor.get(id);
+            if (obj != null) {
+                System.out.println("当前: " + obj);
+                System.out.println("修改功能演示-按回车跳过");
+                readLine(); return;
+            }
+        }
+        System.out.println("未找到ID: " + id);
     }
 
     private void showSearchMenu() {
