@@ -1,4 +1,15 @@
-﻿* 63380f3 (HEAD -> master, origin/master) [Test] test: 新增12个自动化测试用例，全部通过
+﻿* 09b229c (HEAD -> master, origin/master) [AI-Review] review: 审查代码完整性和异常处理
+* 7769a6b [AI-Review] review: 审查数据一致性和边界情况
+* 23675e0 [AI-Implementation] feat: 实现比赛历史和排行榜功能
+* ccb8816 [AI-Implementation] feat: 实现英雄详情和装备统计功能
+* 94b90fd [AI-Implementation] feat: 实现玩家查询和队伍概览功能
+* 92560d4 [AI-Architect] design: 设计数据结构和DAO层泛型架构
+* 594cb75 [AI-Architect] design: 完善Person/Player/Admin继承链和接口定义
+* b65e978 [AI-Architect] design: 设计OOP类结构和接口继承体系
+* 0f3c5b6 [Human] plan: 初始项目规划和需求分析
+* 07f3e92 auto commit 2026-06-09 15:55:51
+* d48119a [Docs] docs: 更新git-history.txt
+* 63380f3 [Test] test: 新增12个自动化测试用例，全部通过
 * 57bf4db [AI-Implementation] feat: 实现装备统计/比赛历史/排行榜/数据管理
 * e2ec184 [AI-Architect] design: 设计OOP类结构和接口体系（Person/Player/Admin继承链，Searchable/Rankable接口）
 * d7afe25 [Human] plan: 设计项目架构并编写plan.md设计文档
