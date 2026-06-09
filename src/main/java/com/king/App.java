@@ -11,3 +11,4 @@ public class App {
         new MenuController().start();
     }
 }
+// version 1.0.0 - AI-Assisted Honor of Kings IMS
