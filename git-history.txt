@@ -1,4 +1,6 @@
-﻿* 09b229c (HEAD -> master, origin/master) [AI-Review] review: 审查代码完整性和异常处理
+﻿* 32666e2 (HEAD -> master) auto commit 2026-06-09 15:57:28
+* 24cd45f (origin/master) [Docs] docs: 更新git-history.txt提交记录
+* 09b229c [AI-Review] review: 审查代码完整性和异常处理
 * 7769a6b [AI-Review] review: 审查数据一致性和边界情况
 * 23675e0 [AI-Implementation] feat: 实现比赛历史和排行榜功能
 * ccb8816 [AI-Implementation] feat: 实现英雄详情和装备统计功能
