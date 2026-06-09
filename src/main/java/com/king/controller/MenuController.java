@@ -111,6 +111,7 @@ public class MenuController {
         System.out.println("9. 英雄详情");
         System.out.println("10. 装备统计");
         System.out.println("11. 比赛历史");
+        System.out.println("12. 开发日志（记录AI辅助开发过程）");
         System.out.println("0. 退出登录");
         System.out.print("请选择: ");
         String choice = readLine();
