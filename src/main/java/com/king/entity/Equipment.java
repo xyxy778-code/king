@@ -1,26 +1,19 @@
 package com.king.entity;
 
-public class Equipment {
-    private String id;
-    private String name;
+public class Equipment extends BaseEntity implements Searchable, Rankable {
     private String category;
     private int price;
     private String effect;
 
-    public Equipment() {}
+    public Equipment() { super(); }
 
     public Equipment(String id, String name, String category, int price, String effect) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.category = category;
         this.price = price;
         this.effect = effect;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
     public int getPrice() { return price; }
@@ -29,8 +22,22 @@ public class Equipment {
     public void setEffect(String effect) { this.effect = effect; }
 
     @Override
-    public String toString() {
+    public boolean matches(String keyword) {
+        String k = keyword.toLowerCase();
+        return id.toLowerCase().contains(k)
+                || name.toLowerCase().contains(k)
+                || category.toLowerCase().contains(k);
+    }
+
+    @Override
+    public int getRankValue() { return price; }
+
+    @Override
+    public String toDisplayString() {
         return String.format("[%s] %s | 类型:%s | 价格:%d | 效果:%s",
                 id, name, category, price, effect);
     }
+
+    @Override
+    public String toString() { return toDisplayString(); }
 }
