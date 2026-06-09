@@ -113,6 +113,7 @@ public class MenuController {
             case "4" -> System.out.println(user);
             case "5" -> { if (authService.isAdmin()) showAdminMenu(); else throw new InputException("无权限！"); }
             case "6" -> doSaveData();
+            case "7" -> doPlayerQuery();
             case "0" -> { authService.logout(); System.out.println("已退出登录。"); }
             default -> throw new InputException("无效选项: " + choice);
         }
@@ -125,6 +126,36 @@ public class MenuController {
         } catch (DataException e) {
             throw new InputException("保存文件失败: " + e.getMessage(), e);
         }
+    }
+
+    private void doPlayerQuery() {
+        System.out.print("请输入玩家ID或昵称: ");
+        String keyword = readLine();
+        List<Player> results = playerQueryService.searchPlayer(keyword);
+        if (results.isEmpty()) {
+            System.out.println("未找到匹配的玩家");
+            return;
+        }
+        if (results.size() == 1) {
+            System.out.println(playerQueryService.getPlayerDetail(results.get(0)));
+        } else {
+            System.out.println("找到多个匹配:");
+            for (int i = 0; i < results.size(); i++) {
+                System.out.println((i + 1) + ". " + results.get(i));
+            }
+            System.out.print("请选择序号查看详情（0跳过）: ");
+            String sel = readLine();
+            try {
+                int idx = Integer.parseInt(sel) - 1;
+                if (idx >= 0 && idx < results.size()) {
+                    System.out.println(playerQueryService.getPlayerDetail(results.get(idx)));
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("无效序号");
+            }
+        }
+        System.out.println("按回车键返回...");
+        readLine();
     }
 
     private void showAdminMenu() {
