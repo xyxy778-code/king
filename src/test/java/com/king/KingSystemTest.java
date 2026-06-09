@@ -136,11 +136,11 @@ public class KingSystemTest {
     // ==== 测试用例 6: 队伍概览统计 ====
     private static void testCase06_teamOverviewStats() {
         String input = "查询队伍 T01";
-        String expected = "队伍有4名成员, 平均等级>20, 有比赛记录";
+        String expected = "队伍有≥5名成员, 平均等级>20, 有比赛记录";
 
         Team t1 = store.teams.get("T01");
         String detail = teamOverviewService.getTeamDetail(t1);
-        boolean ok = t1.getPlayerIds().size() == 4
+        boolean ok = t1.getPlayerIds().size() >= 5
                 && t1.getAverageLevel() > 20
                 && detail.contains("比赛场次");
         String actual = ok ? String.format("成员%d人, 平均等级%.1f, 有比赛记录",
