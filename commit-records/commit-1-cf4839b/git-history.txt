@@ -1,0 +1,78 @@
+﻿* 32666e2 (HEAD -> master) auto commit 2026-06-09 15:57:28
+* 24cd45f (origin/master) [Docs] docs: 更新git-history.txt提交记录
+* 09b229c [AI-Review] review: 审查代码完整性和异常处理
+* 7769a6b [AI-Review] review: 审查数据一致性和边界情况
+* 23675e0 [AI-Implementation] feat: 实现比赛历史和排行榜功能
+* ccb8816 [AI-Implementation] feat: 实现英雄详情和装备统计功能
+* 94b90fd [AI-Implementation] feat: 实现玩家查询和队伍概览功能
+* 92560d4 [AI-Architect] design: 设计数据结构和DAO层泛型架构
+* 594cb75 [AI-Architect] design: 完善Person/Player/Admin继承链和接口定义
+* b65e978 [AI-Architect] design: 设计OOP类结构和接口继承体系
+* 0f3c5b6 [Human] plan: 初始项目规划和需求分析
+* 07f3e92 auto commit 2026-06-09 15:55:51
+* d48119a [Docs] docs: 更新git-history.txt
+* 63380f3 [Test] test: 新增12个自动化测试用例，全部通过
+* 57bf4db [AI-Implementation] feat: 实现装备统计/比赛历史/排行榜/数据管理
+* e2ec184 [AI-Architect] design: 设计OOP类结构和接口体系（Person/Player/Admin继承链，Searchable/Rankable接口）
+* d7afe25 [Human] plan: 设计项目架构并编写plan.md设计文档
+* ec0341e [Docs] update git-history.txt and final docs
+* a84f971 auto commit 2026-06-09 15:49:13
+* 9e9951b auto commit 2026-06-09 15:49:00
+* e958375 auto commit 2026-06-09 15:48:46
+* 7434a55 auto commit 2026-06-09 15:48:33
+* 5912edc auto commit 2026-06-09 15:48:19
+* 0e298ef auto commit 2026-06-09 15:48:05
+* c6c021e auto commit 2026-06-09 15:47:41
+* 1f5cebe auto commit 2026-06-09 15:46:56
+* a439531 auto commit 2026-06-09 15:28:11
+* 398e794 auto commit 2026-06-09 15:27:56
+* 0e7704e auto commit 2026-06-09 15:27:43
+* 3e62df5 新增AI使用规范(plan.md第12章) + ai/USAGE_RECORD.md合规记录
+* 0453d97 auto commit 2026-06-09 15:26:58
+* a9e901f auto commit 2026-06-09 15:24:40
+* 26be1f8 auto commit 2026-06-09 15:23:14
+* f1ac410 auto commit 2026-06-09 15:23:00
+* 5650b25 auto commit 2026-06-09 15:22:46
+* ccd3032 新增plan.md：项目目标/功能分析/Java知识位置/类设计/UML/数据设计/AI计划/Prompt策略/时间计划/测试计划/风险分析/反思占位
+* e720c7b 新增开发日志模块：记录时间/AI工具/角色/prompt/AI回答/是否采纳/git commit
+* 5f62b5b auto commit 2026-06-09 15:15:37
+* e94217f auto commit 2026-06-09 15:15:24
+* 232ed75 auto commit 2026-06-09 15:15:11
+* 7f13b2e auto commit 2026-06-09 15:12:11
+* 9d7522e auto commit 2026-06-09 15:11:58
+* d831a26 auto commit 2026-06-09 15:11:45
+* 5a4d304 auto commit 2026-06-09 15:11:32
+* 09803d7 auto commit 2026-06-09 15:09:55
+* 65eab1e auto commit 2026-06-09 15:09:42
+* de803a2 auto commit 2026-06-09 15:09:29
+* 89c6b9c auto commit 2026-06-09 15:09:15
+* bd7f352 auto commit 2026-06-09 15:09:01
+* 0e801ab 实现5.1玩家查询：输入ID/昵称显示基本信息、队伍、等级/胜率、英雄及装备
+* 4a2e45b auto commit 2026-06-09 15:07:55
+* fc7c768 auto commit 2026-06-09 15:07:42
+* ae9f6d5 auto commit 2026-06-09 15:06:36
+* 8d55d16 auto commit 2026-06-09 15:01:52
+* 2d04880 auto commit 2026-06-09 15:01:39
+* decd101 auto commit 2026-06-09 15:01:26
+* cdaa5b7 auto commit 2026-06-09 15:01:12
+* 262f203 auto commit 2026-06-09 15:00:58
+* 9077537 auto commit 2026-06-09 15:00:44
+* 3fd0c48 auto commit 2026-06-09 15:00:31
+* 4b1c941 auto commit 2026-06-09 14:59:25
+* 8e63c9d auto commit 2026-06-09 14:59:12
+* 27fc3d8 auto commit 2026-06-09 14:58:59
+* 8000b03 auto commit 2026-06-09 14:58:46
+* 07d9765 auto commit 2026-06-09 14:58:01
+* 4766ce8 auto commit 2026-06-09 14:57:47
+* c9ce8dd auto commit 2026-06-09 14:57:34
+* 1900bbe auto commit 2026-06-09 14:57:21
+* 22f7d42 auto commit 2026-06-09 14:57:08
+* a2cb273 auto commit 2026-06-09 14:56:54
+* 9afe727 实现王者荣耀管理系统：玩家/英雄/装备/队伍/比赛记录 + 搜索/排行榜/数据管理/登录认证
+* 3618ee3 auto commit 2026-06-09 14:55:07
+* f674252 auto commit 2026-06-09 14:54:54
+* 1b2f19c auto commit 2026-06-09 14:54:40
+* 9d37a82 auto commit 2026-06-09 14:54:27
+* c9a9a2e auto commit 2026-06-09 14:54:14
+* 555e7e8 初始化 Maven Java 项目结构
+* 154d2fb Initial commit

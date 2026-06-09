@@ -1,0 +1,3 @@
+Commit: ccb8816
+Message: [AI-Implementation] feat: 实现英雄详情和装备统计功能
+

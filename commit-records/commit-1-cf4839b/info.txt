@@ -1,0 +1,3 @@
+Commit: cf4839b
+Message: [Fix] fix: 删除auto-git脚本防止提交冲突，更新git-history.txt
+
