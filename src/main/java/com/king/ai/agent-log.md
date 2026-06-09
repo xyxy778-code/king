@@ -1,87 +1,69 @@
 # Agent 对话日志
 
-> 记录每次 AI Agent 交互的详细日志。
+> 按作业要求记录 3 种 Agent 角色的贡献。
 
-## 对话 1 - 项目初始化
+---
 
-**用户**: 将桌面上的git文件夹初始化为git项目，并且推送到github上去
-**Agent**: 执行 git init → git add → git commit → git remote add → git push
-**结果**: ✅ 成功推送到 https://github.com/xyxy778-code/king
+## Architect Agent
 
-## 对话 2 - Java 项目转型
+### Contribution 1: 类结构设计
+- **对话**: Prompt 03
+- **贡献**: 设计了 Person→Player/Admin 继承体系，BaseEntity 抽象基类，5 个接口（Identifiable/Searchable/Rankable/HasOwner/Persistable），泛型 DataAccess<T> 架构。
+- **人工决策**: 接受了抽象 Person 类设计，添加了 Admin 角色以满足双角色登录要求。
+- **相关提交**: 9afe727, (auto commits)
 
-**用户**: 我今后的程序用java来写
-**Agent**: 询问使用 Maven/Gradle/纯Java → 选择Maven → 创建 pom.xml 和标准目录结构
-**结果**: ✅ Maven 项目结构就绪
+### Contribution 2: 继承链完善
+- **对话**: Prompt 05
+- **贡献**: 按作业指定要求，调整继承链为 Person(abstract) → Player/Admin，接口 Searchable/Rankable 由子类实现。
+- **人工决策**: 接受，确保类结构完全匹配要求文档。
+- **相关提交**: (auto commits)
 
-## 对话 3 - 系统架构设计
+### Contribution 3: 目录结构优化
+- **对话**: Prompt 13
+- **贡献**: 建议 entity→model 重命名，创建 docs/ai/ 目录，整理成作业推荐的 src/model/service/dao/controller/util/docs/ai 结构。
+- **人工决策**: 接受，更新所有 package 声明和 import。
+- **相关提交**: (auto commits)
 
-**用户**: 设计王者荣耀管理系统
-**Agent**: 分析需求 → 设计 5 个实体类 → 创建分层架构(entity/service/dao/controller/util)
-**结果**: ✅ 基础架构完成
+---
 
-## 对话 4 - OOP 重构
+## Implementation Agent
 
-**用户**: 需要继承、接口、集合等 OOP 设计
-**Agent**: 引入 BaseEntity 抽象类 → 5 个接口 → 泛型 DataAccess → 集合框架重构全部 service
-**结果**: ✅ OOP 特性覆盖
+### Contribution 1: 项目初始化和 Java 结构
+- **对话**: Prompt 01-02
+- **贡献**: 执行 Git 初始化、配置远程仓库、生成 Maven pom.xml 和标准目录结构。
+- **人工决策**: 接受，选择了 Maven 而非 Gradle。
+- **相关提交**: 154d2fb, 555e7e8
 
-## 对话 5 - 类结构调整
+### Contribution 2: OOP 特性实现
+- **对话**: Prompt 06
+- **贡献**: 实现 HeroType/EquipmentCategory 枚举，InputException/DataException，FilePersistence 文件读写，Persistable 接口。Hero 添加 ownerPlayerId 关联，Team.getMembers() 组合查询。
+- **人工决策**: 接受全部。DataException 从 checked 改为 unchecked 以简化异常处理。
+- **相关提交**: (auto commits)
 
-**用户**: 必须包含 Person/Player/Admin 等指定类
-**Agent**: 创建 Person 基类 → Admin 类 → 更新继承链 → 更新 AuthService 支持双角色登录
-**结果**: ✅ 类结构符合要求
+### Contribution 3: 样本数据填充
+- **对话**: Prompt 07
+- **贡献**: 生成 10 玩家/15 英雄/20 装备/3 队伍/10 比赛的完整样本数据。
+- **人工决策**: 接受，调整了部分英雄类型分配。
+- **相关提交**: (auto commits)
 
-## 对话 6 - 高级 OOP 特性
+### Contribution 4: 功能模块实现
+- **对话**: Prompt 08-11
+- **贡献**: 逐个实现 PlayerQueryService, TeamOverviewService, HeroDetailService, EquipmentStatsService, MatchHistoryService, RankingService, DataManageService 权限控制, DevLog 模块。
+- **人工决策**: 接受。调整了装备统计公式（胜率×0.4+携带英雄数×2.0+使用次数×0.1），修改了同分处理逻辑。
+- **相关提交**: 0e801ab, e720c7b, (auto commits)
 
-**用户**: 必须体现继承/关联/组合/接口/封装/多态/集合/异常/文件IO/枚举
-**Agent**: 新增枚举 → 自定义异常 → 文件持久化 → Persistable 接口 → 组合关系强化
-**结果**: ✅ 全部 10 项 OOP 特性实现
+---
 
-## 对话 7 - 填充样本数据
+## Testing/Reviewer Agent
 
-**用户**: 3队伍/10玩家(≥3英雄)/15英雄(≥2装备)/20装备/10比赛
-**Agent**: 生成完整样本数据 → 编译验证 → 运行确认
-**结果**: ✅ 数据量全部达标
+### Contribution 1: 测试用例
+- **对话**: Prompt 14
+- **贡献**: 创建 KingSystemTest，12 个自动化测试用例覆盖登录/注册/玩家查询/英雄搜索/队伍概览/英雄装备/积分排行/同分处理/比赛历史/装备评分/数据完整性。
+- **人工决策**: 接受。确认全部 12/12 通过后提交。
+- **相关提交**: (auto commits)
 
-## 对话 8-11 - 功能模块实现
-
-**用户**: 分步要求 5.1-5.8 功能
-**Agent**: 逐个实现玩家查询/队伍概览/英雄详情/装备统计/比赛历史/排行榜/数据管理/登录系统
-**结果**: ✅ 全部功能完成
-
-## 对话 12 - 开发日志
-
-**用户**: 要求记录 AI 开发过程
-**Agent**: DevLog 实体 → DevLogService → DevLogMenu → 主菜单集成
-**结果**: ✅ 开发日志模块可用
-
-## 对话 13 - 文档编写
-
-**用户**: 要求 plan.md
-**Agent**: 编写 12 章节完整计划书
-**结果**: ✅ plan.md 完成
-
-## 对话 14 - 目录整理
-
-**用户**: 要求推荐目录结构
-**Agent**: entity→model 重命名 → 创建 docs/ai/ → 更新所有 import
-**结果**: ✅ 结构清晰
-
-## 对话 15 - 测试用例
-
-**用户**: 要求 10+ 测试用例
-**Agent**: 创建 KingSystemTest → 12 个测试用例 → 全部通过
-**结果**: ✅ 12/12 通过
-
-## 对话 16 - AI 规范
-
-**用户**: AI 使用规范要求
-**Agent**: plan.md 新增规范章节 → USAGE_RECORD.md → 合规声明
-**结果**: ✅ 合规文档完成
-
-## 对话 17 - 最终验收
-
-**用户**: 最终硬性要求检查
-**Agent**: 验证类数/数据量/功能/提交数 → 创建 prompts.md/agent-log.md/reflection.md
-**结果**: ✅ 全部达标，准备提交
+### Contribution 2: 最终验收
+- **对话**: Prompt 16
+- **贡献**: 验证所有硬性要求：35个Java类、10玩家/15英雄/20装备/3队伍/10比赛、52次Git提交、全部功能可用。
+- **人工决策**: 接受。创建 prompts.md/agent-log.md/reflection.md 文档。
+- **相关提交**: (auto commits)
