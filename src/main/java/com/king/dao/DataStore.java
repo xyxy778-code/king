@@ -131,13 +131,13 @@ public class DataStore {
         h14.getEquipIds().addAll(Arrays.asList("E011","E013","E014"));
         h15.getEquipIds().addAll(Arrays.asList("E014","E015","E013"));
 
-        // ==================== 3 队伍 ====================
+        // ==================== 3 队伍（每队至少5人）====================
         Team t1 = new Team("T01", "王者之师");
-        t1.getPlayerIds().addAll(Arrays.asList("P01","P03","P05","P07"));
+        t1.getPlayerIds().addAll(Arrays.asList("P01","P03","P05","P07","P09"));
         Team t2 = new Team("T02", "荣耀战队");
-        t2.getPlayerIds().addAll(Arrays.asList("P02","P04","P06","P08"));
+        t2.getPlayerIds().addAll(Arrays.asList("P02","P04","P06","P08","P10"));
         Team t3 = new Team("T03", "巅峰联盟");
-        t3.getPlayerIds().addAll(Arrays.asList("P09","P10"));
+        t3.getPlayerIds().addAll(Arrays.asList("P01","P02","P06","P08","P10"));
         teams.add(t1); teams.add(t2); teams.add(t3);
 
         // ==================== 10 比赛记录 ====================
