@@ -25,23 +25,23 @@ public class DataStore {
         admins.add(new Admin("A001", "root", "root123", "超级管理员", "超级管理员"));
         admins.add(new Admin("A002", "op", "op123", "运营管理员", "运营管理"));
 
-        Hero h1 = new Hero("H001", "赵云", "苍天翔龙", "战士", 18888);
-        h1.setWinRate(52);
-        Hero h2 = new Hero("H002", "诸葛亮", "绝代智谋", "法师", 18888);
-        h2.setWinRate(51);
-        Hero h3 = new Hero("H003", "后羿", "半神之弓", "射手", 13888);
-        h3.setWinRate(50);
-        Hero h4 = new Hero("H004", "李白", "青莲剑仙", "刺客", 18888);
-        h4.setWinRate(49);
-        Hero h5 = new Hero("H005", "庄周", "逍遥幻梦", "辅助", 13888);
-        h5.setWinRate(53);
+        Hero h1 = new Hero("H001", "赵云", "苍天翔龙", HeroType.WARRIOR, 18888);
+        h1.setWinRate(52); h1.setOwnerPlayerId("P001");
+        Hero h2 = new Hero("H002", "诸葛亮", "绝代智谋", HeroType.MAGE, 18888);
+        h2.setWinRate(51); h2.setOwnerPlayerId("P001");
+        Hero h3 = new Hero("H003", "后羿", "半神之弓", HeroType.ARCHER, 13888);
+        h3.setWinRate(50); h3.setOwnerPlayerId("P002");
+        Hero h4 = new Hero("H004", "李白", "青莲剑仙", HeroType.ASSASSIN, 18888);
+        h4.setWinRate(49); h4.setOwnerPlayerId("P002");
+        Hero h5 = new Hero("H005", "庄周", "逍遥幻梦", HeroType.SUPPORT, 13888);
+        h5.setWinRate(53); h5.setOwnerPlayerId("P003");
         heroes.add(h1); heroes.add(h2); heroes.add(h3); heroes.add(h4); heroes.add(h5);
 
-        equipments.add(new Equipment("E001", "无尽战刃", "攻击", 2140, "+130物理攻击, +20%暴击率"));
-        equipments.add(new Equipment("E002", "回响之杖", "法术", 2100, "+240法术攻击, +7%移速"));
-        equipments.add(new Equipment("E003", "急速战靴", "移动", 710, "+30%攻击速度"));
-        equipments.add(new Equipment("E004", "魔女斗篷", "防御", 2120, "+360法术防御, +1000最大生命"));
-        equipments.add(new Equipment("E005", "破晓", "攻击", 3400, "+100物理攻击, +35%攻速"));
+        equipments.add(new Equipment("E001", "无尽战刃", EquipmentCategory.ATTACK, 2140, "+130物理攻击, +20%暴击率"));
+        equipments.add(new Equipment("E002", "回响之杖", EquipmentCategory.MAGIC, 2100, "+240法术攻击, +7%移速"));
+        equipments.add(new Equipment("E003", "急速战靴", EquipmentCategory.MOVE, 710, "+30%攻击速度"));
+        equipments.add(new Equipment("E004", "魔女斗篷", EquipmentCategory.DEFENSE, 2120, "+360法术防御, +1000最大生命"));
+        equipments.add(new Equipment("E005", "破晓", EquipmentCategory.ATTACK, 3400, "+100物理攻击, +35%攻速"));
 
         Player p1 = new Player("P001", "admin", "123456", "王者管理员");
         p1.setLevel(30); p1.setScore(9999);
