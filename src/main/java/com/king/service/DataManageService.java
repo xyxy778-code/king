@@ -19,8 +19,8 @@ public class DataManageService {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Identifiable> BaseDataAccess<T> getAccessor(Class<T> clazz) {
-        return (BaseDataAccess<T>) accessorMap.get(clazz);
+    public BaseDataAccess<Identifiable> getAccessor(Class<?> clazz) {
+        return (BaseDataAccess<Identifiable>) accessorMap.get(clazz);
     }
 
     public Collection<?> getAll(Class<?> clazz) {

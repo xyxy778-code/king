@@ -1,6 +1,6 @@
 package com.king.entity;
 
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Identifiable {
     protected String id;
     protected String name;
 

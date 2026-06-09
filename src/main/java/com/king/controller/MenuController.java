@@ -10,6 +10,36 @@ public class MenuController {
     private final RankingService rankingService = new RankingService();
     private final DataManageService dataService = new DataManageService();
     private final Scanner scanner = new Scanner(System.in);
+    private final Map<String, Runnable> loginMenus = new LinkedHashMap<>();
+    private final Map<String, Runnable> mainMenus = new LinkedHashMap<>();
+    private final Map<String, Runnable> rankingMenus = new LinkedHashMap<>();
+    private final Map<String, Class<?>> entityMenus = new LinkedHashMap<>();
+
+    public MenuController() {
+        initMenus();
+    }
+
+    private void initMenus() {
+        loginMenus.put("1", this::doLogin);
+        loginMenus.put("2", this::doRegister);
+
+        mainMenus.put("1", this::showDataManageMenu);
+        mainMenus.put("2", this::showSearchMenu);
+        mainMenus.put("3", this::showRankingMenu);
+        mainMenus.put("4", () -> System.out.println(authService.getCurrentPlayer()));
+
+        rankingMenus.put("1", () -> showRanking("玩家积分排行", rankingService.getPlayerRankingByScore()));
+        rankingMenus.put("2", () -> showRanking("玩家等级排行", rankingService.getPlayerRankingByLevel()));
+        rankingMenus.put("3", () -> showRanking("英雄胜率排行", rankingService.getHeroRankingByWinRate()));
+        rankingMenus.put("4", () -> showRanking("英雄价格排行", rankingService.getHeroRankingByPrice()));
+        rankingMenus.put("5", () -> showRanking("装备价格排行", rankingService.getEquipmentRankingByPrice()));
+
+        entityMenus.put("1", Player.class);
+        entityMenus.put("2", Hero.class);
+        entityMenus.put("3", Equipment.class);
+        entityMenus.put("4", Team.class);
+        entityMenus.put("5", MatchRecord.class);
+    }
 
     public void start() {
         while (true) {
@@ -29,12 +59,10 @@ public class MenuController {
         System.out.print("请选择: ");
         String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1" -> doLogin();
-            case "2" -> doRegister();
-            case "0" -> { System.out.println("再见！"); System.exit(0); }
-            default -> System.out.println("无效选择！");
-        }
+        if ("0".equals(choice)) { System.out.println("再见！"); System.exit(0); }
+        Runnable action = loginMenus.get(choice);
+        if (action != null) action.run();
+        else System.out.println("无效选择！");
     }
 
     private void doLogin() {
@@ -77,43 +105,35 @@ public class MenuController {
         System.out.print("请选择: ");
         String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1" -> showDataManageMenu();
-            case "2" -> showSearchMenu();
-            case "3" -> showRankingMenu();
-            case "4" -> System.out.println(authService.getCurrentPlayer());
-            case "0" -> { authService.logout(); System.out.println("已退出登录。"); }
-            default -> System.out.println("无效选择！");
-        }
+        if ("0".equals(choice)) { authService.logout(); return; }
+        Runnable action = mainMenus.get(choice);
+        if (action != null) action.run();
+        else System.out.println("无效选择！");
     }
 
     private void showDataManageMenu() {
         while (true) {
             System.out.println("\n--- 数据管理 ---");
-            System.out.println("1. 玩家管理");
-            System.out.println("2. 英雄管理");
-            System.out.println("3. 装备管理");
-            System.out.println("4. 队伍管理");
-            System.out.println("5. 比赛记录管理");
+            for (Map.Entry<String, Class<?>> e : entityMenus.entrySet()) {
+                System.out.println(e.getKey() + ". " + dataService.getEntityLabel(e.getValue()) + "管理");
+            }
             System.out.println("0. 返回");
             System.out.print("请选择: ");
             String choice = scanner.nextLine();
 
-            switch (choice) {
-                case "1" -> manageEntity("玩家", dataService.getAllPlayers());
-                case "2" -> manageEntity("英雄", dataService.getAllHeroes());
-                case "3" -> manageEntity("装备", dataService.getAllEquipments());
-                case "4" -> manageEntity("队伍", dataService.getAllTeams());
-                case "5" -> manageEntity("比赛记录", dataService.getAllMatches());
-                case "0" -> { return; }
-                default -> System.out.println("无效选择！");
-            }
+            if ("0".equals(choice)) return;
+            Class<?> clazz = entityMenus.get(choice);
+            if (clazz != null) manageEntity(clazz);
+            else System.out.println("无效选择！");
         }
     }
 
-    private void manageEntity(String name, Collection<?> all) {
-        System.out.println("\n--- " + name + "列表 ---");
-        all.forEach(System.out::println);
+    private void manageEntity(Class<?> clazz) {
+        String label = dataService.getEntityLabel(clazz);
+        System.out.println("\n--- " + label + "列表 ---");
+        for (Object obj : dataService.getAll(clazz)) {
+            System.out.println(obj);
+        }
         System.out.println("按回车键返回...");
         scanner.nextLine();
     }
@@ -121,22 +141,16 @@ public class MenuController {
     private void showSearchMenu() {
         System.out.print("\n请输入搜索关键词: ");
         String keyword = scanner.nextLine();
+        Map<String, List<? extends Searchable>> results = searchService.searchAll(keyword);
 
-        System.out.println("\n--- 玩家搜索结果 ---");
-        searchService.searchPlayers(keyword).forEach(System.out::println);
-
-        System.out.println("\n--- 英雄搜索结果 ---");
-        searchService.searchHeroes(keyword).forEach(System.out::println);
-
-        System.out.println("\n--- 装备搜索结果 ---");
-        searchService.searchEquipments(keyword).forEach(System.out::println);
-
-        System.out.println("\n--- 队伍搜索结果 ---");
-        searchService.searchTeams(keyword).forEach(System.out::println);
-
-        System.out.println("\n--- 比赛记录搜索结果 ---");
-        searchService.searchMatches(keyword).forEach(System.out::println);
-
+        for (Map.Entry<String, List<? extends Searchable>> e : results.entrySet()) {
+            System.out.println("\n--- " + e.getKey() + "搜索结果 ---");
+            if (e.getValue().isEmpty()) {
+                System.out.println("无结果");
+            } else {
+                e.getValue().forEach(System.out::println);
+            }
+        }
         System.out.println("按回车键返回...");
         scanner.nextLine();
     }
@@ -153,19 +167,14 @@ public class MenuController {
             System.out.print("请选择: ");
             String choice = scanner.nextLine();
 
-            switch (choice) {
-                case "1" -> showRanking("玩家积分排行", rankingService.getPlayerRankingByScore());
-                case "2" -> showRanking("玩家等级排行", rankingService.getPlayerRankingByLevel());
-                case "3" -> showRanking("英雄胜率排行", rankingService.getHeroRankingByWinRate());
-                case "4" -> showRanking("英雄价格排行", rankingService.getHeroRankingByPrice());
-                case "5" -> showRanking("装备价格排行", rankingService.getEquipmentRankingByPrice());
-                case "0" -> { return; }
-                default -> System.out.println("无效选择！");
-            }
+            if ("0".equals(choice)) return;
+            Runnable action = rankingMenus.get(choice);
+            if (action != null) action.run();
+            else System.out.println("无效选择！");
         }
     }
 
-    private void showRanking(String title, List<?> list) {
+    private <T> void showRanking(String title, List<T> list) {
         System.out.println("\n--- " + title + " ---");
         for (int i = 0; i < list.size(); i++) {
             System.out.println("第" + (i + 1) + "名: " + list.get(i));
