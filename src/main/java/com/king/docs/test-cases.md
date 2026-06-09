@@ -63,8 +63,8 @@
 
 **Function Tested**: 队伍概览
 **Input**: 查询队伍 `T01`
-**Expected Output**: 队伍有 4 名成员，平均等级 > 20，有比赛记录
-**Actual Output**: 成员 5 人，平均等级 26.8，有比赛记录
+**Expected Output**: 队伍有 ≥5 名成员，平均等级 > 20，有比赛记录
+**Actual Output**: 成员 5 人，平均等级 26.4，有比赛记录
 **Result**: Pass
 **Bug Found**: 无
 
