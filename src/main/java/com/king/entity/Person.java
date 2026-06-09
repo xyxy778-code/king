@@ -1,6 +1,6 @@
 package com.king.entity;
 
-public abstract class Person extends BaseEntity {
+public abstract class Person extends BaseEntity implements Searchable {
     protected String username;
     protected String password;
     protected String nickname;
