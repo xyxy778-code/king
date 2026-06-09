@@ -1,4 +1,9 @@
-﻿* a84f971 (HEAD -> master, origin/master) auto commit 2026-06-09 15:49:13
+﻿* 63380f3 (HEAD -> master, origin/master) [Test] test: 新增12个自动化测试用例，全部通过
+* 57bf4db [AI-Implementation] feat: 实现装备统计/比赛历史/排行榜/数据管理
+* e2ec184 [AI-Architect] design: 设计OOP类结构和接口体系（Person/Player/Admin继承链，Searchable/Rankable接口）
+* d7afe25 [Human] plan: 设计项目架构并编写plan.md设计文档
+* ec0341e [Docs] update git-history.txt and final docs
+* a84f971 auto commit 2026-06-09 15:49:13
 * 9e9951b auto commit 2026-06-09 15:49:00
 * e958375 auto commit 2026-06-09 15:48:46
 * 7434a55 auto commit 2026-06-09 15:48:33
