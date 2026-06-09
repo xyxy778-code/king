@@ -18,39 +18,30 @@ public class RankingService {
     }
 
     public List<Player> getPlayerRankingByWinRate() {
-        return rankPlayers(Comparator.comparingInt(p -> {
-            Hero hero = store.heroes.get(p.getHeroIds().isEmpty() ? "" : p.getHeroIds().get(0));
-            return hero != null ? hero.getWinRate() : 0;
-        }).reversed()
-                .thenComparing(Comparator.comparingInt(Player::getScore).reversed()));
+        return rankPlayers((Player a, Player b) -> {
+            int wa = getPlayerAvgWinRate(a);
+            int wb = getPlayerAvgWinRate(b);
+            if (wa != wb) return Integer.compare(wb, wa);
+            return Integer.compare(b.getScore(), a.getScore());
+        });
     }
 
     public List<Player> getPlayerRankingByMatchCount() {
-        return rankPlayers(Comparator.comparingLong(p -> {
-            return store.matches.getAll().stream()
-                    .filter(m -> m.getHeroIds().stream()
-                            .anyMatch(hid -> {
-                                Hero h = store.heroes.get(hid);
-                                return h != null && p.getHeroIds().contains(hid);
-                            }))
-                    .count();
-        }).reversed()
-                .thenComparing(Comparator.comparingInt(Player::getScore).reversed()));
+        return rankPlayers((Player a, Player b) -> {
+            long ma = getPlayerMatchCount(a);
+            long mb = getPlayerMatchCount(b);
+            if (ma != mb) return Long.compare(mb, ma);
+            return Integer.compare(b.getScore(), a.getScore());
+        });
     }
 
     public List<Player> getPlayerRankingByCustomScore() {
-        return rankPlayers(Comparator.comparingDouble(p -> {
-            int score = p.getScore();
-            int level = p.getLevel();
-            long matchCount = store.matches.getAll().stream()
-                    .filter(m -> m.getHeroIds().stream()
-                            .anyMatch(hid -> {
-                                Hero h = store.heroes.get(hid);
-                                return h != null && p.getHeroIds().contains(hid);
-                            }))
-                    .count();
-            return -(score * 0.5 + level * 10 + matchCount * 5);
-        }).thenComparing(Comparator.comparingInt(Player::getScore).reversed()));
+        return rankPlayers((Player a, Player b) -> {
+            double sa = getCustomScore(a);
+            double sb = getCustomScore(b);
+            if (sa != sb) return Double.compare(sb, sa);
+            return Integer.compare(b.getScore(), a.getScore());
+        });
     }
 
     public List<Hero> getHeroRankingByWinRate() {
@@ -66,6 +57,23 @@ public class RankingService {
     public List<Equipment> getEquipmentRankingByPrice() {
         return rankEquipments(Comparator.comparingInt(Equipment::getPrice).reversed()
                 .thenComparing(Equipment::getName));
+    }
+
+    private int getPlayerAvgWinRate(Player p) {
+        return (int) p.getHeroIds().stream()
+                .mapToInt(hid -> { Hero h = store.heroes.get(hid); return h != null ? h.getWinRate() : 0; })
+                .average().orElse(0);
+    }
+
+    private long getPlayerMatchCount(Player p) {
+        return store.matches.getAll().stream()
+                .filter(m -> m.getHeroIds().stream()
+                        .anyMatch(hid -> p.getHeroIds().contains(hid)))
+                .count();
+    }
+
+    private double getCustomScore(Player p) {
+        return p.getScore() * 0.5 + p.getLevel() * 10 + getPlayerMatchCount(p) * 5;
     }
 
     private List<Player> rankPlayers(Comparator<Player> comparator) {

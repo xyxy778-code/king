@@ -171,6 +171,36 @@ public class MenuController {
         readLine();
     }
 
+    private void doEditProfile(Person user) {
+        System.out.println("\n========== 个人信息 ==========");
+        System.out.println(user);
+        System.out.println("\n1. 修改昵称");
+        System.out.println("2. 修改密码");
+        System.out.println("0. 返回");
+        System.out.print("请选择: ");
+        String choice = readLine();
+        switch (choice) {
+            case "1" -> {
+                System.out.print("新昵称: ");
+                String newNick = readLine();
+                if (!newNick.isBlank()) {
+                    user.setNickname(newNick);
+                    System.out.println("昵称已更新！");
+                }
+            }
+            case "2" -> {
+                System.out.print("新密码: ");
+                String newPwd = readLine();
+                if (!newPwd.isBlank()) {
+                    user.setPassword(newPwd);
+                    System.out.println("密码已更新！");
+                }
+            }
+            case "0" -> { return; }
+            default -> System.out.println("无效选择！");
+        }
+    }
+
     private void doTeamOverview() {
         System.out.print("请输入队伍ID或名称: ");
         String keyword = readLine();
