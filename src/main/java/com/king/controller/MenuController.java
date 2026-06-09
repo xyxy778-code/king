@@ -12,6 +12,7 @@ public class MenuController {
     private final SearchService searchService = new SearchService();
     private final RankingService rankingService = new RankingService();
     private final DataManageService dataService = new DataManageService();
+    private final PlayerQueryService playerQueryService = new PlayerQueryService();
     private final FilePersistence filePersistence = new FilePersistence();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -100,6 +101,7 @@ public class MenuController {
         System.out.println("4. 查看个人信息");
         System.out.println("5. 管理员专区");
         System.out.println("6. 保存数据到文件");
+        System.out.println("7. 玩家查询（ID/昵称）");
         System.out.println("0. 退出登录");
         System.out.print("请选择: ");
         String choice = readLine();

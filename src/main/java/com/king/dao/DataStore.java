@@ -113,6 +113,23 @@ public class DataStore {
         h07.setOwnerPlayerId("P09"); h01.setOwnerPlayerId("P09"); h15.setOwnerPlayerId("P09"); h02.setOwnerPlayerId("P09");
         h04.setOwnerPlayerId("P10"); h08.setOwnerPlayerId("P10"); h05.setOwnerPlayerId("P10"); h12.setOwnerPlayerId("P10");
 
+        // 英雄分配装备（每个英雄≥2件）
+        h01.getEquipIds().addAll(Arrays.asList("E001","E002","E003"));
+        h02.getEquipIds().addAll(Arrays.asList("E001","E011","E012"));
+        h03.getEquipIds().addAll(Arrays.asList("E003","E004","E005"));
+        h04.getEquipIds().addAll(Arrays.asList("E006","E007","E010"));
+        h05.getEquipIds().addAll(Arrays.asList("E006","E008","E009"));
+        h06.getEquipIds().addAll(Arrays.asList("E007","E010","E008"));
+        h07.getEquipIds().addAll(Arrays.asList("E001","E004","E016"));
+        h08.getEquipIds().addAll(Arrays.asList("E003","E005","E016"));
+        h09.getEquipIds().addAll(Arrays.asList("E001","E003","E017"));
+        h10.getEquipIds().addAll(Arrays.asList("E001","E005","E017"));
+        h11.getEquipIds().addAll(Arrays.asList("E002","E019","E017"));
+        h12.getEquipIds().addAll(Arrays.asList("E012","E015","E018"));
+        h13.getEquipIds().addAll(Arrays.asList("E012","E011","E018"));
+        h14.getEquipIds().addAll(Arrays.asList("E011","E013","E014"));
+        h15.getEquipIds().addAll(Arrays.asList("E014","E015","E013"));
+
         // ==================== 3 队伍 ====================
         Team t1 = new Team("T01", "王者之师");
         t1.getPlayerIds().addAll(Arrays.asList("P01","P03","P05","P07"));
