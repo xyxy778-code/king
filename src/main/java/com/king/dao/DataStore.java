@@ -5,6 +5,7 @@ import java.util.*;
 
 public class DataStore {
     public final BaseDataAccess<Player> players = new BaseDataAccess<>();
+    public final BaseDataAccess<Admin> admins = new BaseDataAccess<>();
     public final BaseDataAccess<Hero> heroes = new BaseDataAccess<>();
     public final BaseDataAccess<Equipment> equipments = new BaseDataAccess<>();
     public final BaseDataAccess<Team> teams = new BaseDataAccess<>();
@@ -21,6 +22,9 @@ public class DataStore {
     }
 
     private void initSampleData() {
+        admins.add(new Admin("A001", "root", "root123", "超级管理员", "超级管理员"));
+        admins.add(new Admin("A002", "op", "op123", "运营管理员", "运营管理"));
+
         Hero h1 = new Hero("H001", "赵云", "苍天翔龙", "战士", 18888);
         h1.setWinRate(52);
         Hero h2 = new Hero("H002", "诸葛亮", "绝代智谋", "法师", 18888);
