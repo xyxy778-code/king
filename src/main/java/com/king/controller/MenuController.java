@@ -128,6 +128,7 @@ public class MenuController {
             case "9" -> doHeroDetail();
             case "10" -> doEquipmentStats();
             case "11" -> doMatchHistory();
+            case "12" -> new DevLogMenu().show();
             case "0" -> { authService.logout(); System.out.println("已退出登录。"); }
             default -> throw new InputException("无效选项: " + choice);
         }

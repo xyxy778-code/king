@@ -44,7 +44,6 @@ public class DevLog implements Identifiable {
     public String getGitCommit() { return gitCommit; }
     public void setGitCommit(String gitCommit) { this.gitCommit = gitCommit; }
 
-    @Override
     public String toDisplayString() {
         return String.format("[%s] %s | AI:%s | 角色:%s | prompt:%s | 采纳:%s | commit:%s",
                 id, time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
