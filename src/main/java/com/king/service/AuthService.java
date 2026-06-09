@@ -9,7 +9,7 @@ public class AuthService {
     private Player currentPlayer;
 
     public Optional<Player> login(String username, String password) {
-        for (Player p : store.players.values()) {
+        for (Player p : store.players.getAll()) {
             if (p.getUsername().equals(username) && p.getPassword().equals(password)) {
                 currentPlayer = p;
                 return Optional.of(p);
@@ -31,11 +31,11 @@ public class AuthService {
     }
 
     public boolean register(String id, String username, String password, String nickname) {
-        for (Player p : store.players.values()) {
+        for (Player p : store.players.getAll()) {
             if (p.getUsername().equals(username)) return false;
         }
         Player player = new Player(id, username, password, nickname);
-        store.players.put(id, player);
+        store.players.add(player);
         return true;
     }
 }
