@@ -13,6 +13,10 @@ public class MenuController {
     private final RankingService rankingService = new RankingService();
     private final DataManageService dataService = new DataManageService();
     private final PlayerQueryService playerQueryService = new PlayerQueryService();
+    private final TeamOverviewService teamOverviewService = new TeamOverviewService();
+    private final HeroDetailService heroDetailService = new HeroDetailService();
+    private final EquipmentStatsService equipmentStatsService = new EquipmentStatsService();
+    private final MatchHistoryService matchHistoryService = new MatchHistoryService();
     private final FilePersistence filePersistence = new FilePersistence();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -102,6 +106,10 @@ public class MenuController {
         System.out.println("5. 管理员专区");
         System.out.println("6. 保存数据到文件");
         System.out.println("7. 玩家查询（ID/昵称）");
+        System.out.println("8. 队伍概览");
+        System.out.println("9. 英雄详情");
+        System.out.println("10. 装备统计");
+        System.out.println("11. 比赛历史");
         System.out.println("0. 退出登录");
         System.out.print("请选择: ");
         String choice = readLine();
@@ -114,6 +122,10 @@ public class MenuController {
             case "5" -> { if (authService.isAdmin()) showAdminMenu(); else throw new InputException("无权限！"); }
             case "6" -> doSaveData();
             case "7" -> doPlayerQuery();
+            case "8" -> doTeamOverview();
+            case "9" -> doHeroDetail();
+            case "10" -> doEquipmentStats();
+            case "11" -> doMatchHistory();
             case "0" -> { authService.logout(); System.out.println("已退出登录。"); }
             default -> throw new InputException("无效选项: " + choice);
         }
