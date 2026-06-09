@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchRecord {
-    private String id;
+public class MatchRecord extends BaseEntity implements Searchable {
     private String teamAId;
     private String teamBId;
     private String winnerTeamId;
@@ -13,20 +12,19 @@ public class MatchRecord {
     private List<String> heroIds;
 
     public MatchRecord() {
+        super();
         this.heroIds = new ArrayList<>();
     }
 
     public MatchRecord(String id, String teamAId, String teamBId, String winnerTeamId) {
-        this();
-        this.id = id;
+        super(id, "比赛-" + id);
         this.teamAId = teamAId;
         this.teamBId = teamBId;
         this.winnerTeamId = winnerTeamId;
         this.matchTime = LocalDateTime.now();
+        this.heroIds = new ArrayList<>();
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
     public String getTeamAId() { return teamAId; }
     public void setTeamAId(String teamAId) { this.teamAId = teamAId; }
     public String getTeamBId() { return teamBId; }
@@ -39,8 +37,20 @@ public class MatchRecord {
     public void setHeroIds(List<String> heroIds) { this.heroIds = heroIds; }
 
     @Override
-    public String toString() {
+    public boolean matches(String keyword) {
+        String k = keyword.toLowerCase();
+        return id.toLowerCase().contains(k)
+                || teamAId.toLowerCase().contains(k)
+                || teamBId.toLowerCase().contains(k)
+                || winnerTeamId.toLowerCase().contains(k);
+    }
+
+    @Override
+    public String toDisplayString() {
         return String.format("[%s] 队伍%s vs 队伍%s | 胜者:%s | %s",
                 id, teamAId, teamBId, winnerTeamId, matchTime);
     }
+
+    @Override
+    public String toString() { return toDisplayString(); }
 }
